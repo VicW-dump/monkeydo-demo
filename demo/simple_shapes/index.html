@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monkeydo Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        #element {
+            --size: 100px;
+            width: var(--size);
+            height: var(--size);
+            background-color: orange;
+            transition: 300ms;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas">
+        <div id="element"></div>
+    </div>
+    <div id="code">
+        <div class="hljs">
+            <div id="cursor"></div>
+            <pre class="code_monkey"></pre>
+        </div>
+        <div class="hljs">
+            <pre class="code_methods"></pre>
+        </div>
+    </div>
+    <script class="code_methods">
+const methods = {
+    element: document.getElementById("element"),
+    moveTo: (x,y) => {
+        methods.element.style.setProperty("transform",`translate(${x}%,${y}%)`);
+    },
+    setColor: (color) => {
+        methods.element.style.setProperty("background-color",color);
+    }
+};
+    </script>
+    <script class="code_monkey">
+const manifest = {
+    "tasks": [
+        [2000,"moveTo",100,0],
+        [1500,"setColor","red"],
+        [2650,"setColor","blue"],
+        [550,"moveTo",350,0]
+    ]
+};
+    </script>
+    <script type="module">
+        import Demo from "../script.mjs";
+        const demo = new Demo(methods);
+        demo.play(manifest);
+    </script>
+</body>
+</html>

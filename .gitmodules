@@ -1,0 +1,3 @@
+[submodule "monkeydo"]
+	path = monkeydo
+	url = https://github.com/VictorWesterlund/monkeydo.git

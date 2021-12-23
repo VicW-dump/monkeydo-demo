@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monkeydo Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+    </style>
+</head>
+<body>
+    <div id="canvas">
+        
+    </div>
+    <div id="code">
+        <div class="hljs">
+            <div id="cursor"></div>
+            <pre class="code_monkey"></pre>
+        </div>
+        <div class="hljs">
+            <pre class="code_methods"></pre>
+        </div>
+    </div>
+    <script class="code_methods">
+const methods = {};
+    </script>
+    <script class="code_monkey">
+const manifest = {};
+    </script>
+    <script type="module">
+        import Demo from "../script.mjs";
+        const demo = new Demo(methods);
+        demo.play(manifest);
+    </script>
+</body>
+</html>
