@@ -6,7 +6,7 @@ import { default as Monkeydo } from "../monkeydo/Monkeydo.mjs";
 
 const cursor = {
 	element: document.getElementById("cursor"),
-	_line: 3,
+	_line: 2,
 	// Move the cursor to the next line
 	advance: () => {
 		cursor._line++;
@@ -45,7 +45,12 @@ export default class Demo extends Monkeydo {
 		const source = document.querySelector(`script.${className}`);
 		const target = document.querySelector(`pre.${className}`);
 
-		target.innerHTML = source.innerText;
+		let code = source.innerText;
+		
+		// Remove first EOL
+		if(code.substring(0,1) === "\n") code = code.substring(1);
+
+		target.innerHTML = code;
 		
 		hljs.highlightElement(target);
 	}

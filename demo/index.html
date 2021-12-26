@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Monkeydo Demo</title>
+	<style>
+		* {
+			margin: 0;
+			font-family: monospace;
+		}
+		html,
+		body {
+			height: 100%;
+			display: grid;
+			grid-template-rows: 80px 1fr;
+			align-items: center;
+			justify-items: center;
+		}
+		li::before {
+			content: attr(id);
+			color: blue;
+			cursor: pointer;
+			font-size: 20px;
+			margin-right: 5px;
+		}
+		li + li {
+			margin-top: 15px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Monkeydo demos</h1>
+	<ul>
+		<li id="simple_shapes"></li>
+	</ul>
+	<script>
+		document.getElementsByTagName("ul")[0].addEventListener("click",event => {
+			if(event.target.id) window.location.href = event.target.id;
+		});
+	</script>
+</body>
+</html>
