@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monkeydo Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            transition: 300ms background-color;
+            background-color: black;
+        }
+        
+        #canvas {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+        }
+
+        #canvas :is(h1,span) {
+            font-size: clamp(16px,8vw,22vh);
+            color: white;
+            display: none;
+            text-transform: uppercase;
+        }
+
+        #canvas[data-v*="7"] :is(h1:nth-child(3),span:nth-child(3)),
+        #canvas[data-v*="6"] :is(h1:nth-child(3),span:nth-child(2)),
+        #canvas[data-v*="3"] :is(h1:nth-child(3),span:nth-child(1)),
+        #canvas[data-v$="2"] h1:nth-child(2),
+        #canvas[data-v$="1"] h1:nth-child(1) {
+            display: initial;
+        }
+
+        #canvas[data-v$="5"] h1:nth-child(3) span:nth-child(1) { opacity: 1; }
+        #canvas[data-v$="4"] h1:nth-child(3) span:nth-child(1) { opacity: .5; }
+        #canvas[data-v$="3"] h1:nth-child(3) span:nth-child(1) { opacity: .1; }
+    </style>
+</head>
+<body>
+    <div id="canvas">
+        <h1>Oh</h1>
+        <h1>I</h1>
+        <h1><span>See you</span><span>, every</span><span> time</span></h1>
+    </div>
+    <div id="code">
+        <div class="hljs">
+            <div id="cursor"></div>
+            <pre class="code_monkey"></pre>
+        </div>
+        <div class="hljs">
+            <pre class="code_methods"></pre>
+        </div>
+    </div>
+    <script class="code_methods">
+const methods = {
+    bgColor: (color) => {
+        document.body.style.setProperty("background-color",color);
+    },
+    step: () => {
+        const canvas = document.getElementById("canvas");
+        if(!canvas.dataset.i) canvas.dataset.i = canvas.dataset.v = 1;
+        let i = parseInt(canvas.dataset.i);
+        canvas.dataset.i = Number.isInteger(i) ? i + 1 : 1;
+        canvas.dataset.v += " " + i;
+    }
+};
+    </script>
+    <script class="code_monkey">
+const manifest = {
+    "tasks": [
+        [0,"bgColor","#281c27"],
+        [0,"step"],
+        [50,"bgColor","#7a89b9"],
+        [500,"step"],
+        [500,"step"],
+        [250,"step"],
+        [350,"step"],
+        [300,"step"],
+        [0,"bgColor","#9e7795"],
+        [200,"step"],
+        [0,"bgColor","#a7577e"],
+        [0,"step"]
+    ]
+};
+    </script>
+    <script type="module">
+        import Demo from "../script.mjs";
+
+        const audio = new Audio("dance.mp3");
+
+        const demo = new Demo(methods);
+        demo.media.bind(audio);
+        demo.play(manifest);
+    </script>
+</body>
+</html>
